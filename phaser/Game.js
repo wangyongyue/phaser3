@@ -1,4 +1,4 @@
-function startGame(pre,scene,player,star,bomb,score){
+function startGame(pre,scene,player,star,bomb,action,score){
 
     var config = {
         type: Phaser.AUTO,
@@ -27,7 +27,21 @@ function startGame(pre,scene,player,star,bomb,score){
     function update ()
     {
         if (gameOver){return;}
-        player.update();
+
+        action.left(() => {
+            player.left();
+        })
+        action.right(() => {
+            player.right();
+        })
+        action.up(() => {
+            player.up();
+        })
+        action.stop(() => {
+            player.stop();
+        })
+
+
     }
     function create ()
     {
@@ -36,6 +50,7 @@ function startGame(pre,scene,player,star,bomb,score){
         star.load(this);
         bomb.load(this);
         score.load(this);
+        action.load(this);
 
         //将玩家和星星与平台碰撞
         this.physics.add.collider(player.obj(), scene.obj());

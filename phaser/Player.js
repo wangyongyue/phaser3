@@ -1,8 +1,6 @@
 function Player(){
 
     var player;
-
-    var cursors;
     this.load = function(game){
 
         player = game.physics.add.sprite(100, 450, 'dude');
@@ -31,8 +29,6 @@ function Player(){
         });
 
 
-        //  Input Events   输入事件 
-        cursors = game.input.keyboard.createCursorKeys();  
 
     }
     this.obj = function(){
@@ -49,32 +45,28 @@ function Player(){
 
 
     }
-    this.update = function(){
+    this.left = function(){
 
-        if (cursors.left.isDown)
-        {
-            player.setVelocityX(-160);
-
-            player.anims.play('left', true);
-        }
-        else if (cursors.right.isDown)
-        {
-            player.setVelocityX(160);
-
-            player.anims.play('right', true);
-        }
-        else
-        {
-            player.setVelocityX(0);
-
-            player.anims.play('turn');
-        }
-
-        if (cursors.up.isDown && player.body.touching.down)
-        {
-            player.setVelocityY(-330);
-        }
-
+        player.setVelocityX(-160);
+        player.anims.play('left', true);
     }
+    this.right = function(){
+
+        player.setVelocityX(160);
+        player.anims.play('right', true);
+    }
+    this.up = function(){
+
+        if (player.body.touching.down)
+        {
+             player.setVelocityY(-330);
+        }
+    }
+    this.stop = function(){
+
+         player.setVelocityX(0);
+         player.anims.play('turn');
+    }
+    
       
 }
